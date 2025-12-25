@@ -2,7 +2,9 @@ import pandas as pd
 import plotly.express as px
 from dash import Dash, html, dcc, callback, Output, Input
 
-df = pd.read_csv("Soul_Foods_Data.csv")
+
+def load_data():
+    return pd.read_csv("Soul_Foods_Data.csv")
 app = Dash()
 app.layout = html.Div(children=[html.H1("Soul Foods Visualiser"),
                                 html.Br(),
@@ -26,6 +28,7 @@ app.layout = html.Div(children=[html.H1("Soul Foods Visualiser"),
 )
 
 def update_output(selected_region):
+    df = load_data()
     if selected_region != "Overall Performance":
         filtered_df = df[df["region"] == selected_region]
     else:
